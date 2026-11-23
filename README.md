@@ -54,7 +54,7 @@ dsh plugin --profile <profile> add ./dsh-session-delete
 ## 已知限制 / Limitations
 
 - 仅适用于标准 DSH 组合（`dsh-workspace` 注册表 + `dsh-session-persistence-jsonl` 后端）。
-- 无工作区归属的会话删除后，侧边栏可能需下次刷新才消失。
+- 删除成功后通过 `api-session/removed` 事件通知客户端移除目录行，侧边栏实时更新。
 - 共享附件存储与 spill 临时文件不随会话删除（内容寻址存储可能被其他会话引用）。
 - 搜索索引为派生库，在下次对账时自动清除已删会话。
 - 删除不可恢复，请谨慎操作。

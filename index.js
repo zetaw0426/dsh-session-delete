@@ -120,6 +120,16 @@ async function deleteSession(ctx, roots, sessionId) {
   } catch (error) {
     return { ok: false, code: 'io-failed', message: String(error) };
   }
+
+  // Tell the connected clients to drop the session from their catalog. This
+  // is the same signal the Session Controller emits on session/disposed; a
+  // cold external deletion produces no lifecycle event of its own, so without
+  // it the browser keeps the stale summary (rendered as an ungrouped row).
+  try {
+    ctx.emit('api-session/removed', sessionId);
+  } catch {
+    // The files are gone; a missing event bus must not fail the deletion.
+  }
   return { ok: true };
 }
 
