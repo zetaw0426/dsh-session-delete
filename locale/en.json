@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Session Delete",
+    "description": "Adds a Delete action to the session more-options menu. After confirmation it permanently removes the selected cold session's log and projection cache and detaches it from its workspace; open or running sessions are refused."
+  }
+}
